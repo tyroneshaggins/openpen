@@ -1,0 +1,228 @@
+﻿<Window x:Class="OpenPen.Views.ToolbarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OpenPen"
+        Width="780"
+        Height="136"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        UseLayoutRounding="True">
+    <Grid Margin="14">
+        <Border x:Name="Bar"
+                Background="{StaticResource ToolbarBackgroundBrush}"
+                BorderBrush="#2EFFFFFF"
+                BorderThickness="1"
+                CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="26" ShadowDepth="5" Direction="270" Opacity="0.46" Color="#000000" />
+            </Border.Effect>
+
+            <Grid Margin="13,6,13,6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition x:Name="DetailsRow" Height="44" />
+                </Grid.RowDefinitions>
+
+                <!-- Tool row -->
+                <DockPanel Grid.Row="0" LastChildFill="False">
+                    <Border x:Name="DragArea"
+                            Width="92"
+                            Background="Transparent"
+                            Cursor="SizeAll"
+                            ToolTip="Drag to move · Right-click to close or hide"
+                            MouseLeftButtonDown="DragArea_MouseLeftButtonDown"
+                            MouseLeftButtonUp="DragArea_MouseLeftButtonUp"
+                            MouseMove="DragArea_MouseMove">
+                        <Border.ContextMenu>
+                            <ContextMenu x:Name="BrandMenu"
+                                         Opened="BrandMenu_Opened"
+                                         Closed="BrandMenu_Closed">
+                                <MenuItem Header="Hide toolbar" InputGestureText="Ctrl+Shift+0" Click="ContextHide_Click" />
+                                <MenuItem Header="Settings…" Click="ContextSettings_Click" />
+                                <Separator />
+                                <MenuItem Header="Close OpenPen" Foreground="{StaticResource DangerBrush}" Click="ContextClose_Click" />
+                            </ContextMenu>
+                        </Border.ContextMenu>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border Width="26" Height="26" CornerRadius="9" Background="{StaticResource AccentBrush}">
+                                <Path Data="{StaticResource IconNib}"
+                                      Fill="#FFFFFFFF"
+                                      Stretch="Uniform"
+                                      Width="16"
+                                      Height="16"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Text="OpenPen"
+                                       Margin="7,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextBrush}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Border>
+
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="6,0" VerticalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ToggleButton x:Name="PassButton" Style="{StaticResource IconToggle}" Tag="PassThrough" Click="Tool_Click"
+                                      ToolTip="Pass clicks through · Ctrl+Shift+8" AutomationProperties.Name="Pass-through">
+                            <Path Data="{StaticResource IconCursor}" Style="{StaticResource IconFilled}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="PenButton" Style="{StaticResource IconToggle}" Tag="Pen" Click="Tool_Click"
+                                      ToolTip="Pen · Ctrl+Shift+3" AutomationProperties.Name="Pen">
+                            <Path Data="{StaticResource IconPen}" Style="{StaticResource IconFilled}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="HighlighterButton" Style="{StaticResource IconToggle}" Tag="Highlighter" Click="Tool_Click"
+                                      ToolTip="Highlighter · Ctrl+Shift+4" AutomationProperties.Name="Highlighter">
+                            <Path Data="{StaticResource IconHighlighter}" Style="{StaticResource IconFilled}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="EraserButton" Style="{StaticResource IconToggle}" Tag="Eraser" Click="Tool_Click"
+                                      ToolTip="Eraser · Ctrl+Shift+5" AutomationProperties.Name="Eraser">
+                            <Path Data="{StaticResource IconEraser}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="TextButton" Style="{StaticResource IconToggle}" Tag="Text" Click="Tool_Click"
+                                      ToolTip="Text · Ctrl+Shift+T" AutomationProperties.Name="Text">
+                            <Path Data="{StaticResource IconText}" Style="{StaticResource IconFilled}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="LineButton" Style="{StaticResource IconToggle}" Tag="Line" Click="Tool_Click"
+                                      ToolTip="Line · Ctrl+Shift+L" AutomationProperties.Name="Line">
+                            <Path Data="{StaticResource IconLine}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="ArrowButton" Style="{StaticResource IconToggle}" Tag="Arrow" Click="Tool_Click"
+                                      ToolTip="Arrow · Ctrl+Shift+A" AutomationProperties.Name="Arrow">
+                            <Path Data="{StaticResource IconArrow}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="RectangleButton" Style="{StaticResource IconToggle}" Tag="Rectangle" Click="Tool_Click"
+                                      ToolTip="Rectangle · Ctrl+Shift+R" AutomationProperties.Name="Rectangle">
+                            <Path Data="{StaticResource IconRect}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="EllipseButton" Style="{StaticResource IconToggle}" Tag="Ellipse" Click="Tool_Click"
+                                      ToolTip="Ellipse · Ctrl+Shift+E" AutomationProperties.Name="Ellipse">
+                            <Path Data="{StaticResource IconEllipse}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                    </StackPanel>
+
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="6,0" VerticalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="UndoButton" Style="{StaticResource IconButton}" Click="Undo_Click"
+                                ToolTip="Undo · Ctrl+Shift+6" AutomationProperties.Name="Undo">
+                            <Path Data="{StaticResource IconUndo}" Style="{StaticResource IconStroked}" />
+                        </Button>
+                        <Button x:Name="RedoButton" Style="{StaticResource IconButton}" Click="Redo_Click"
+                                ToolTip="Redo · Ctrl+Shift+Z" AutomationProperties.Name="Redo">
+                            <Path Data="{StaticResource IconRedo}" Style="{StaticResource IconStroked}" />
+                        </Button>
+                        <Button x:Name="ClearButton" Style="{StaticResource IconButton}" Click="Clear_Click"
+                                ToolTip="Clear all ink · Ctrl+Shift+7" AutomationProperties.Name="Clear ink">
+                            <Path Data="{StaticResource IconTrash}" Style="{StaticResource IconStroked}" />
+                        </Button>
+                        <Button x:Name="ScreenshotButton" Style="{StaticResource IconButton}" Click="Screenshot_Click"
+                                ToolTip="Screenshot to clipboard · Ctrl+Shift+," AutomationProperties.Name="Screenshot">
+                            <Path Data="{StaticResource IconCamera}" Style="{StaticResource IconStroked}" />
+                        </Button>
+                    </StackPanel>
+
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="6,0" VerticalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ToggleButton x:Name="WhiteboardButton" Style="{StaticResource IconToggle}" Click="Whiteboard_Click"
+                                      ToolTip="Whiteboard / blackboard · Ctrl+Shift+W / B" AutomationProperties.Name="Whiteboard">
+                            <Path Data="{StaticResource IconBoard}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="SpotlightButton" Style="{StaticResource IconToggle}" Click="Spotlight_Click"
+                                      ToolTip="Spotlight cursor · Ctrl+Shift+2" AutomationProperties.Name="Spotlight">
+                            <Path Data="{StaticResource IconSpotlight}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="FadeButton" Style="{StaticResource IconToggle}" Click="Fade_Click"
+                                      ToolTip="Fading ink · Ctrl+Shift+F" AutomationProperties.Name="Fading ink">
+                            <Path Data="{StaticResource IconFade}" Style="{StaticResource IconStroked}" />
+                        </ToggleButton>
+                        <Button x:Name="SettingsButton" Style="{StaticResource IconButton}" Click="Settings_Click"
+                                ToolTip="Settings &amp; shortcuts" AutomationProperties.Name="Settings">
+                            <Path Data="{StaticResource IconSliders}" Style="{StaticResource IconStroked}" />
+                        </Button>
+                    </StackPanel>
+
+                    <ToggleButton x:Name="ExpanderButton" Style="{StaticResource IconToggle}" Width="30" Height="30"
+                                  DockPanel.Dock="Right" VerticalAlignment="Center" Click="Expander_Click"
+                                  ToolTip="More options" AutomationProperties.Name="More options">
+                        <Path x:Name="ExpanderIcon" Data="{StaticResource IconChevron}"
+                              Style="{StaticResource IconStroked}" Width="14" Height="14"
+                              RenderTransformOrigin="0.5,0.5" />
+                    </ToggleButton>
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="6,0" VerticalAlignment="Center"
+                               DockPanel.Dock="Right" />
+                </DockPanel>
+
+                <!-- Color and size row (collapsible) -->
+                <DockPanel x:Name="DetailsPanel" Grid.Row="1" LastChildFill="False" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" DockPanel.Dock="Left">
+                        <StackPanel x:Name="QuickColorPanel" Orientation="Horizontal" VerticalAlignment="Center" />
+                        <Button x:Name="CustomColorButton" Style="{StaticResource IconButton}" Width="28" Height="28"
+                                Click="CustomColor_Click" Margin="3,0,0,0"
+                                ToolTip="Custom color…" AutomationProperties.Name="Custom color">
+                            <Path Data="{StaticResource IconPlus}" Style="{StaticResource IconStroked}" Width="14" Height="14" />
+                        </Button>
+                    </StackPanel>
+
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="9,0" VerticalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="SizeDownButton" Style="{StaticResource IconButton}" Width="28" Height="28" AutomationProperties.Name="Smaller"
+                                Click="SizeDown_Click" ToolTip="Smaller · [">
+                            <Path Data="{StaticResource IconMinus}" Style="{StaticResource IconStroked}" Width="14" Height="14" />
+                        </Button>
+                        <Border Width="58" Height="28" CornerRadius="8" Background="#12FFFFFF" BorderBrush="#18FFFFFF" BorderThickness="1" Margin="2,0">
+                            <TextBlock x:Name="SizeText" Text="4 px" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       FontSize="11" Foreground="{StaticResource TextBrush}" FontFamily="Consolas" />
+                        </Border>
+                        <Button x:Name="SizeUpButton" Style="{StaticResource IconButton}" Width="28" Height="28" AutomationProperties.Name="Larger"
+                                Click="SizeUp_Click" ToolTip="Larger · ]">
+                            <Path Data="{StaticResource IconPlus}" Style="{StaticResource IconStroked}" Width="14" Height="14" />
+                        </Button>
+                    </StackPanel>
+
+                    <Rectangle Width="1" Height="23" Fill="#1CFFFFFF" Margin="9,0" VerticalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Path Data="{StaticResource IconOpacity}" Style="{StaticResource IconStroked}"
+                              Stroke="{StaticResource TextMutedBrush}"
+                              Width="15" Height="15" Margin="0,0,4,0" VerticalAlignment="Center"
+                              ToolTip="Ink opacity for new strokes" />
+                        <Slider x:Name="OpacitySlider" Style="{StaticResource DarkSlider}" Width="58" Height="24"
+                                Minimum="10" Maximum="100" Value="100"
+                                TickFrequency="5" IsSnapToTickEnabled="True"
+                                ValueChanged="Opacity_Changed"
+                                ToolTip="Ink opacity for new strokes"
+                                AutomationProperties.Name="Ink opacity" />
+                        <TextBlock x:Name="OpacityText" Text="100%" Width="30" TextAlignment="Right"
+                                   VerticalAlignment="Center" FontFamily="Consolas" FontSize="10.5"
+                                   Foreground="{StaticResource TextBrush}" />
+                    </StackPanel>
+
+                    <ToggleButton x:Name="InkVisibleButton" Style="{StaticResource IconToggle}" Width="30" Height="30"
+                                  Margin="8,0,0,0"
+                                  Click="InkVisible_Click" ToolTip="Hide ink · Ctrl+Shift+1" AutomationProperties.Name="Ink visible">
+                        <Path Data="{StaticResource IconEye}" Style="{StaticResource IconStroked}" Width="17" Height="17" />
+                    </ToggleButton>
+
+                    <Button x:Name="HideButton" Style="{StaticResource IconButton}" Width="30" Height="30"
+                            DockPanel.Dock="Right" Click="Hide_Click"
+                            ToolTip="Hide toolbar · Ctrl+Shift+0" AutomationProperties.Name="Hide toolbar">
+                        <Path Data="{StaticResource IconHideToolbar}" Style="{StaticResource IconStroked}" Width="14" Height="14" />
+                    </Button>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
