@@ -9,7 +9,8 @@
 - Per-tool sizes, adjustable ink opacity, undo/redo, clear, and fading ink.
 - Whiteboard and blackboard modes.
 - Spotlight cursor.
-- Compact one-row toolbar that expands for colors, size, ink visibility, and hide controls.
+- Compact one-row toolbar that expands for colors, size, opacity, ink visibility, and hide controls.
+- The toolbar always appears on a fresh launch; hiding it is session-only.
 - Right-click the OpenPen wordmark for Hide toolbar, Settings, and Close OpenPen.
 - Pass-through mode, ghost toolbar, tray icon, global hotkeys, and Start with Windows.
 - Screenshots with ink, saved to `Pictures\OpenPen` and copied to the clipboard.

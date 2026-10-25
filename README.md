@@ -77,6 +77,8 @@ right expands the bar for colors, tool size, ink opacity, ink visibility, and th
 Everything is controlled by the floating toolbar, the tray icon, the logo's right-click
 menu, or the shortcuts below.
 
+Hiding the toolbar only lasts for the current session. Every fresh launch shows it again.
+
 ## Builds
 
 There are two variants of the same app:

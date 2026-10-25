@@ -19,7 +19,6 @@ public sealed class AppSettings
     public double SpotlightRadius { get; set; } = 170;
     public bool HotkeysEnabled { get; set; } = true;
     public bool StartWithWindows { get; set; } = false;
-    public bool ToolbarVisible { get; set; } = true;
     public double? ToolbarX { get; set; }
     public double? ToolbarY { get; set; }
     public ToolKind LastDrawingTool { get; set; } = ToolKind.Pen;

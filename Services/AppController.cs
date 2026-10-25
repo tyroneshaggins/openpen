@@ -734,7 +734,8 @@ public sealed class AppController : IDisposable
         State.InkOpacity = Math.Clamp(Settings.InkOpacity, 0.1, 1.0);
         State.SpotlightRadius = Settings.SpotlightRadius;
         State.Fading = Settings.Fading;
-        State.ToolbarVisible = Settings.ToolbarVisible;
+        // Hiding the toolbar is a session action. A fresh launch always shows it.
+        State.ToolbarVisible = true;
         State.HotkeysEnabled = Settings.HotkeysEnabled;
         State.StartWithWindows = StartupService.IsEnabled();
         State.InkVisible = true;
@@ -761,7 +762,6 @@ public sealed class AppController : IDisposable
         Settings.InkOpacity = State.InkOpacity;
         Settings.SpotlightRadius = State.SpotlightRadius;
         Settings.Fading = State.Fading;
-        Settings.ToolbarVisible = State.ToolbarVisible;
         Settings.HotkeysEnabled = State.HotkeysEnabled;
         Settings.StartWithWindows = State.StartWithWindows;
         Settings.LastDrawingTool = State.LastDrawingTool;
